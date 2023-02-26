@@ -1,0 +1,1421 @@
+// 1.Find all the topics and tasks which are thought in the month of October (Using lookup and match)
+
+db.topics.aggregate([
+  {
+    $lookup: {
+      from: "tasks",
+      localField: "userId",
+      foreignField: "userId",
+      as: "October Month Data",
+    },
+  },
+  {
+    $match: {
+      month: "October",
+    },
+  },
+]);
+
+
+
+=>output
+[
+  {
+    _id: ObjectId("63ecf0d557fcc703642b779c"),
+    id: 1,
+    topicName: 'React',
+    month: 'October',
+    userId: 4,
+    'October Month Data': []
+  },
+  {
+    _id: ObjectId("63ecf0d557fcc703642b77a0"),
+    id: 5,
+    topicName: 'Javascript',
+    month: 'October',
+    userId: 16,
+    'October Month Data': []
+  },
+  {
+    _id: ObjectId("63ecf0d557fcc703642b77a3"),
+    id: 8,
+    topicName: 'Javascript Functions',
+    month: 'October',
+    userId: 20,
+    'October Month Data': []
+  },
+  {
+    _id: ObjectId("63ecf0d557fcc703642b77a4"),
+    id: 9,
+    topicName: 'MYSQL Intro',
+    month: 'October',
+    userId: 21,
+    'October Month Data': []
+  },
+  {
+    _id: ObjectId("63ecf0d557fcc703642b77a6"),
+    id: 11,
+    topicName: 'React Components',
+    month: 'October',
+    userId: 18,
+    'October Month Data': []
+  },
+  {
+    _id: ObjectId("63ecf0d557fcc703642b77a8"),
+    id: 13,
+    topicName: 'Javascript Promises',
+    month: 'October',
+    userId: 12,
+    'October Month Data': []
+  },
+  {
+    _id: ObjectId("63ecf0d557fcc703642b77aa"),
+    id: 15,
+    topicName: 'React Hooks and States',
+    month: 'October',
+    userId: 17,
+    'October Month Data': []
+  },
+  {
+    _id: ObjectId("63ecf0d557fcc703642b77ab"),
+    id: 16,
+    topicName: 'React Hook useRef and useReducer',
+    month: 'October',
+    userId: 25,
+    'October Month Data': []
+  },
+  {
+    _id: ObjectId("63ecf0d557fcc703642b77ac"),
+    id: 17,
+    topicName: 'Javascript Async programming',
+    month: 'October',
+    userId: 29,
+    'October Month Data': []
+  },
+  {
+    _id: ObjectId("63ecf0d557fcc703642b77ad"),
+    id: 18,
+    topicName: 'React DOM',
+    month: 'October',
+    userId: 28,
+    'October Month Data': []
+  },
+  {
+    _id: ObjectId("63ecf0d557fcc703642b77ae"),
+    id: 19,
+    topicName: 'React ES5 vs ES6',
+    month: 'October',
+    userId: 5,
+    'October Month Data': []
+  },
+  {
+    _id: ObjectId("63ecf0d557fcc703642b77af"),
+    id: 20,
+    topicName: 'Javascript Callback Function',
+    month: 'October',
+    userId: 9,
+    'October Month Data': []
+  },
+  {
+    _id: ObjectId("63ecf0d557fcc703642b77b0"),
+    id: 21,
+    topicName: 'Node JS and Express JS',
+    month: 'October',
+    userId: 24,
+    'October Month Data': []
+  },
+  {
+    _id: ObjectId("63ecf0d557fcc703642b77b2"),
+    id: 23,
+    topicName: 'React Hooks',
+    month: 'October',
+    userId: 8,
+    'October Month Data': []
+  },
+  {
+    _id: ObjectId("63ecf0d557fcc703642b77b3"),
+    id: 24,
+    topicName: 'Javascript Browser and Web',
+    month: 'October',
+    userId: 30,
+    'October Month Data': []
+  },
+  {
+    _id: ObjectId("63ecf0d557fcc703642b77b4"),
+    id: 25,
+    topicName: 'Javascript Request and Response cycle',
+    month: 'October',
+    userId: 6,
+    'October Month Data': []
+  },
+  {
+    _id: ObjectId("63ecf0d557fcc703642b77b5"),
+    id: 26,
+    topicName: 'Javascript Arrays and Objects',
+    month: 'October',
+    userId: 23,
+    'October Month Data': []
+  },
+  {
+    _id: ObjectId("63ecf0d557fcc703642b77b6"),
+    id: 27,
+    topicName: 'Oops in Javascript',
+    month: 'October',
+    userId: 22,
+    'October Month Data': []
+  },
+  {
+    _id: ObjectId("63ecf0d557fcc703642b77b7"),
+    id: 28,
+    topicName: 'Promise Request Info & Request Init',
+    month: 'October',
+    userId: 14,
+    'October Month Data': []
+  },
+  {
+    _id: ObjectId("63ecf0d557fcc703642b77b8"),
+    id: 29,
+    topicName: 'HTML and CSS Responsive Web Design',
+    month: 'October',
+    userId: 19,
+    'October Month Data': []
+  }
+]
+=============================================================================================================================================
+// 2.Find all the company drives which appeared between 15 oct-2020 and 31-oct-2020 (Using Greater than and Less than )
+
+db.company_drives.find({
+  $or: [
+    { Date: { $gte: ISODate("2020-08-15") } },
+    { Date: { $lte: ISODate("2020-08-31") } },
+  ],
+});
+
+=>output
+    _id: ObjectId("63ecf14f57fcc703642b77e6"),
+    id: 15,
+    companyName: 'Redington',
+    Date: ISODate("2020-08-31T00:00:00.000Z"),
+    userId: 27
+  },
+  {
+    _id: ObjectId("63ecf14f57fcc703642b77e7"),
+    id: 16,
+    companyName: 'Syntel',
+    Date: ISODate("2020-08-21T00:00:00.000Z"),
+    userId: 8
+  },
+  {
+    _id: ObjectId("63ecf14f57fcc703642b77e8"),
+    id: 17,
+    companyName: 'Tata Consultancy Services',
+    Date: ISODate("2020-08-30T00:00:00.000Z"),
+    userId: 25
+  },
+  {
+    _id: ObjectId("63ecf14f57fcc703642b77e9"),
+    id: 18,
+    companyName: 'ThoughtWorks',
+    Date: ISODate("2020-08-28T00:00:00.000Z"),
+    userId: 7
+  },
+  {
+    _id: ObjectId("63ecf14f57fcc703642b77ea"),
+    id: 19,
+    companyName: 'Verzon Data Services',
+    Date: ISODate("2020-11-02T00:00:00.000Z"),
+    userId: 23
+  },
+  {
+    _id: ObjectId("63ecf14f57fcc703642b77eb"),
+    id: 20,
+    companyName: 'UST Global',
+    Date: ISODate("2020-08-24T00:00:00.000Z"),
+    userId: 5
+  }
+]
+Type "it" for more
+company_drives> use topics
+switched to db topics
+topics> db.topics.aggregate([
+...   {
+...     $lookup: {
+...       from: "tasks",
+...       localField: "userId",
+...       foreignField: "userId",
+...       as: "October Month Data",
+...     },
+...   },
+...   {
+...     $match: {
+...       month: "October",
+...     },
+...   },
+... ]);
+[
+  {
+    _id: ObjectId("63ecf0d557fcc703642b779c"),
+    id: 1,
+    topicName: 'React',
+    month: 'October',
+    userId: 4,
+    'October Month Data': []
+  },
+  {
+    _id: ObjectId("63ecf0d557fcc703642b77a0"),
+    id: 5,
+    topicName: 'Javascript',
+    month: 'October',
+    userId: 16,
+    'October Month Data': []
+  },
+  {
+    _id: ObjectId("63ecf0d557fcc703642b77a3"),
+    id: 8,
+    topicName: 'Javascript Functions',
+    month: 'October',
+    userId: 20,
+    'October Month Data': []
+  },
+  {
+    _id: ObjectId("63ecf0d557fcc703642b77a4"),
+    id: 9,
+    topicName: 'MYSQL Intro',
+    month: 'October',
+    userId: 21,
+    'October Month Data': []
+  },
+  {
+    _id: ObjectId("63ecf0d557fcc703642b77a6"),
+    id: 11,
+    topicName: 'React Components',
+    month: 'October',
+    userId: 18,
+    'October Month Data': []
+  },
+  {
+    _id: ObjectId("63ecf0d557fcc703642b77a8"),
+    id: 13,
+    topicName: 'Javascript Promises',
+    month: 'October',
+    userId: 12,
+    'October Month Data': []
+  },
+  {
+    _id: ObjectId("63ecf0d557fcc703642b77aa"),
+    id: 15,
+    topicName: 'React Hooks and States',
+    month: 'October',
+    userId: 17,
+    'October Month Data': []
+  },
+  {
+    _id: ObjectId("63ecf0d557fcc703642b77ab"),
+    id: 16,
+    topicName: 'React Hook useRef and useReducer',
+    month: 'October',
+    userId: 25,
+    'October Month Data': []
+  },
+  {
+    _id: ObjectId("63ecf0d557fcc703642b77ac"),
+    id: 17,
+    topicName: 'Javascript Async programming',
+    month: 'October',
+    userId: 29,
+    'October Month Data': []
+  },
+  {
+    _id: ObjectId("63ecf0d557fcc703642b77ad"),
+    id: 18,
+    topicName: 'React DOM',
+    month: 'October',
+    userId: 28,
+    'October Month Data': []
+  },
+  {
+    _id: ObjectId("63ecf0d557fcc703642b77ae"),
+    id: 19,
+    topicName: 'React ES5 vs ES6',
+    month: 'October',
+    userId: 5,
+    'October Month Data': []
+  },
+  {
+    _id: ObjectId("63ecf0d557fcc703642b77af"),
+    id: 20,
+    topicName: 'Javascript Callback Function',
+    month: 'October',
+    userId: 9,
+    'October Month Data': []
+  },
+  {
+    _id: ObjectId("63ecf0d557fcc703642b77b0"),
+    id: 21,
+    topicName: 'Node JS and Express JS',
+    month: 'October',
+    userId: 24,
+    'October Month Data': []
+  },
+  {
+    _id: ObjectId("63ecf0d557fcc703642b77b2"),
+    id: 23,
+    topicName: 'React Hooks',
+    month: 'October',
+    userId: 8,
+    'October Month Data': []
+  },
+  {
+    _id: ObjectId("63ecf0d557fcc703642b77b3"),
+    id: 24,
+    topicName: 'Javascript Browser and Web',
+    month: 'October',
+    userId: 30,
+    'October Month Data': []
+  },
+  {
+    _id: ObjectId("63ecf0d557fcc703642b77b4"),
+    id: 25,
+    topicName: 'Javascript Request and Response cycle',
+    month: 'October',
+    userId: 6,
+    'October Month Data': []
+  },
+  {
+    _id: ObjectId("63ecf0d557fcc703642b77b5"),
+    id: 26,
+    topicName: 'Javascript Arrays and Objects',
+    month: 'October',
+    userId: 23,
+    'October Month Data': []
+  },
+  {
+    _id: ObjectId("63ecf0d557fcc703642b77b6"),
+    id: 27,
+    topicName: 'Oops in Javascript',
+    month: 'October',
+    userId: 22,
+    'October Month Data': []
+  },
+  {
+    _id: ObjectId("63ecf0d557fcc703642b77b7"),
+    id: 28,
+    topicName: 'Promise Request Info & Request Init',
+    month: 'October',
+    userId: 14,
+    'October Month Data': []
+  },
+  {
+    _id: ObjectId("63ecf0d557fcc703642b77b8"),
+    id: 29,
+    topicName: 'HTML and CSS Responsive Web Design',
+    month: 'October',
+    userId: 19,
+    'October Month Data': []
+  }
+]
+Type "it" for more
+topics> use company_drives
+switched to db company_drives
+company_drives> db.company_drives.find({
+...   $or: [
+...     { Date: { $gte: ISODate("2020-08-15") } },
+...     { Date: { $lte: ISODate("2020-08-31") } },
+...   ],
+... });
+[
+  {
+    _id: ObjectId("63ecf14f57fcc703642b77d8"),
+    id: 1,
+    companyName: 'Google',
+    Date: ISODate("2020-08-15T00:00:00.000Z"),
+    userId: 19
+  },
+  {
+    _id: ObjectId("63ecf14f57fcc703642b77d9"),
+    id: 2,
+    companyName: 'HCL Tech',
+    Date: ISODate("2020-08-23T00:00:00.000Z"),
+    userId: 2
+  },
+  {
+    _id: ObjectId("63ecf14f57fcc703642b77da"),
+    id: 3,
+    companyName: 'Tech Park',
+    Date: ISODate("2020-08-17T00:00:00.000Z"),
+    userId: 30
+  },
+  {
+    _id: ObjectId("63ecf14f57fcc703642b77db"),
+    id: 4,
+    companyName: 'Zoho',
+    Date: ISODate("2020-11-09T00:00:00.000Z"),
+    userId: 4
+  },
+  {
+    _id: ObjectId("63ecf14f57fcc703642b77dc"),
+    id: 5,
+    companyName: 'Tidal Park',
+    Date: ISODate("2020-08-21T00:00:00.000Z"),
+    userId: 9
+  },
+  {
+    _id: ObjectId("63ecf14f57fcc703642b77dd"),
+    id: 6,
+    companyName: 'Cognizant',
+    Date: ISODate("2020-08-25T00:00:00.000Z"),
+    userId: 1
+  },
+  {
+    _id: ObjectId("63ecf14f57fcc703642b77de"),
+    id: 7,
+    companyName: 'Accenture',
+    Date: ISODate("2020-08-19T00:00:00.000Z"),
+    userId: 12
+  },
+  {
+    _id: ObjectId("63ecf14f57fcc703642b77df"),
+    id: 8,
+    companyName: 'Google',
+    Date: ISODate("2020-08-13T00:00:00.000Z"),
+    userId: 29
+  },
+  {
+    _id: ObjectId("63ecf14f57fcc703642b77e0"),
+    id: 9,
+    companyName: 'HCL Tech',
+    Date: ISODate("2020-11-23T00:00:00.000Z"),
+    userId: 13
+  },
+  {
+    _id: ObjectId("63ecf14f57fcc703642b77e1"),
+    id: 10,
+    companyName: 'Cogizant',
+    Date: ISODate("2020-11-03T00:00:00.000Z"),
+    userId: 24
+  },
+  {
+    _id: ObjectId("63ecf14f57fcc703642b77e2"),
+    id: 11,
+    companyName: 'Capgemini',
+    Date: ISODate("2020-08-20T00:00:00.000Z"),
+    userId: 6
+  },
+  {
+    _id: ObjectId("63ecf14f57fcc703642b77e3"),
+    id: 12,
+    companyName: 'BirlaSoft',
+    Date: ISODate("2020-08-25T00:00:00.000Z"),
+    userId: 3
+  },
+  {
+    _id: ObjectId("63ecf14f57fcc703642b77e4"),
+    id: 13,
+    companyName: 'MindTree',
+    Date: ISODate("2020-08-04T00:00:00.000Z"),
+    userId: 28
+  },
+  {
+    _id: ObjectId("63ecf14f57fcc703642b77e5"),
+    id: 14,
+    companyName: 'Oracle',
+    Date: ISODate("2020-08-16T00:00:00.000Z"),
+    userId: 14
+  },
+  {
+    _id: ObjectId("63ecf14f57fcc703642b77e6"),
+    id: 15,
+    companyName: 'Redington',
+    Date: ISODate("2020-08-31T00:00:00.000Z"),
+    userId: 27
+  },
+  {
+    _id: ObjectId("63ecf14f57fcc703642b77e7"),
+    id: 16,
+    companyName: 'Syntel',
+    Date: ISODate("2020-08-21T00:00:00.000Z"),
+    userId: 8
+  },
+  {
+    _id: ObjectId("63ecf14f57fcc703642b77e8"),
+    id: 17,
+    companyName: 'Tata Consultancy Services',
+    Date: ISODate("2020-08-30T00:00:00.000Z"),
+    userId: 25
+  },
+  {
+    _id: ObjectId("63ecf14f57fcc703642b77e9"),
+    id: 18,
+    companyName: 'ThoughtWorks',
+    Date: ISODate("2020-08-28T00:00:00.000Z"),
+    userId: 7
+  },
+  {
+    _id: ObjectId("63ecf14f57fcc703642b77ea"),
+    id: 19,
+    companyName: 'Verzon Data Services',
+    Date: ISODate("2020-11-02T00:00:00.000Z"),
+    userId: 23
+  },
+  {
+    _id: ObjectId("63ecf14f57fcc703642b77eb"),
+    id: 20,
+    companyName: 'UST Global',
+    Date: ISODate("2020-08-24T00:00:00.000Z"),
+    userId: 5
+  }
+]
+
+=================================================================================================================
+// 3.Find all the company drives and students who are appeared for the placement (Using Lookup and match)
+
+db.users.aggregate([
+  {
+    $lookup: {
+      from: "company_drives",
+      localField: "id",
+      foreignField: "userId",
+      as: "Placement Data",
+    },
+  },
+  {
+    $match: {
+      placement: true,
+    },
+  },
+]);
+
+=>output
+[
+  {
+    _id: ObjectId("63ecef16b4102824f1072279"),
+    id: 1,
+    name: 'AAA',
+    age: 20,
+    email: 'aa@gmail.com',
+    contact: 987654324,
+    mentorId: 2,
+    placement: true,
+    codekataProbs: 10,
+    problemSolving: true,
+    attendenceId: 1,
+    taskSubmission: true,
+    'Placement Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f107227b"),
+    id: 3,
+    name: 'CCC',
+    age: 24,
+    email: 'cc@gmail.com',
+    contact: 6546547994,
+    mentorId: 2,
+    placement: true,
+    codekataProbs: 20,
+    problemSolving: true,
+    attendenceId: 2,
+    taskSubmission: false,
+    'Placement Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f107227c"),
+    id: 4,
+    name: 'DDD',
+    age: 34,
+    email: 'dd@gmail.com',
+    contact: 8964693987,
+    mentorId: 2,
+    placement: true,
+    codekataProbs: 30,
+    problemSolving: false,
+    attendenceId: 2,
+    taskSubmission: false,
+    'Placement Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f107227d"),
+    id: 5,
+    name: 'EEE',
+    age: 26,
+    email: 'ee@gmail.com',
+    contact: 7387564350,
+    mentorId: 3,
+    placement: true,
+    codekataProbs: 90,
+    problemSolving: false,
+    attendenceId: 1,
+    taskSubmission: false,
+    'Placement Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f107227f"),
+    id: 7,
+    name: 'GGG',
+    age: 28,
+    email: 'gg@gmail.com',
+    contact: 4380365683,
+    mentorId: 5,
+    placement: true,
+    codekataProbs: 80,
+    problemSolving: true,
+    attendenceId: 2,
+    taskSubmission: true,
+    'Placement Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f1072280"),
+    id: 8,
+    name: 'HHH',
+    age: 35,
+    email: 'hh@gmail.com',
+    contact: 9328758974,
+    mentorId: 3,
+    placement: true,
+    codekataProbs: 70,
+    problemSolving: true,
+    attendenceId: 2,
+    taskSubmission: true,
+    'Placement Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f1072283"),
+    id: 11,
+    name: 'KKK',
+    age: 23,
+    email: 'kk@gmail.com',
+    contact: 2324897485,
+    mentorId: 3,
+    placement: true,
+    codekataProbs: 150,
+    problemSolving: true,
+    attendenceId: 1,
+    taskSubmission: true,
+    'Placement Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f1072284"),
+    id: 12,
+    name: 'LLL',
+    age: 20,
+    email: 'll@gmail.com',
+    contact: 9876543345,
+    mentorId: 4,
+    placement: true,
+    codekataProbs: 200,
+    problemSolving: true,
+    attendenceId: 2,
+    taskSubmission: true,
+    'Placement Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f1072286"),
+    id: 14,
+    name: 'NNN',
+    age: 26,
+    email: 'nn@gmail.com',
+    contact: 9837463765,
+    mentorId: 2,
+    placement: true,
+    codekataProbs: 160,
+    problemSolving: false,
+    attendenceId: 1,
+    taskSubmission: false,
+    'Placement Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f1072287"),
+    id: 15,
+    name: 'OOO',
+    age: 20,
+    email: 'oo@gmail.com',
+    contact: 3894258490,
+    mentorId: 4,
+    placement: true,
+    codekataProbs: 100,
+    problemSolving: true,
+    attendenceId: 1,
+    taskSubmission: false,
+    'Placement Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f1072289"),
+    id: 17,
+    name: 'QQQ',
+    age: 29,
+    email: 'qq@gmail.com',
+    contact: 3948937565,
+    mentorId: 2,
+    placement: true,
+    codekataProbs: 300,
+    problemSolving: true,
+    attendenceId: 2,
+    taskSubmission: false,
+    'Placement Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f107228b"),
+    id: 19,
+    name: 'SSS',
+    age: 35,
+    email: 'ss@gmail.com',
+    contact: 9876874390,
+    mentorId: 2,
+    placement: true,
+    codekataProbs: 170,
+    problemSolving: true,
+    attendenceId: 2,
+    taskSubmission: true,
+    'Placement Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f107228c"),
+    id: 20,
+    name: 'TTT',
+    age: 27,
+    email: 'tt@gmail.com',
+    contact: 5428552656,
+    mentorId: 2,
+    placement: true,
+    codekataProbs: 180,
+    problemSolving: true,
+    attendenceId: 1,
+    taskSubmission: false,
+    'Placement Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f107228e"),
+    id: 22,
+    name: 'VVV',
+    age: 20,
+    email: 'vv@gmail.com',
+    contact: 3834778748,
+    mentorId: 2,
+    placement: true,
+    codekataProbs: 230,
+    problemSolving: true,
+    attendenceId: 2,
+    taskSubmission: true,
+    'Placement Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f107228f"),
+    id: 23,
+    name: 'WWW',
+    age: 34,
+    email: 'ww@gmail.com',
+    contact: 4735678654,
+    mentorId: 3,
+    placement: true,
+    codekataProbs: 190,
+    problemSolving: true,
+    attendenceId: 1,
+    taskSubmission: false,
+    'Placement Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f1072290"),
+    id: 24,
+    name: 'XXX',
+    age: 34,
+    email: 'xx@gmail.com',
+    contact: 8746856368,
+    mentorId: 2,
+    placement: true,
+    codekataProbs: 290,
+    problemSolving: true,
+    attendenceId: 1,
+    taskSubmission: false,
+    'Placement Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f1072291"),
+    id: 25,
+    name: 'YYY',
+    age: 29,
+    email: 'yy@gmail.com',
+    contact: 7868659896,
+    mentorId: 3,
+    placement: true,
+    codekataProbs: 220,
+    problemSolving: true,
+    attendenceId: 1,
+    taskSubmission: true,
+    'Placement Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f1072292"),
+    id: 26,
+    name: 'ZZZ',
+    age: 31,
+    email: 'zz@gmail.com',
+    contact: 3876843477,
+    mentorId: 2,
+    placement: true,
+    codekataProbs: 260,
+    problemSolving: true,
+    attendenceId: 1,
+    taskSubmission: false,
+    'Placement Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f1072293"),
+    id: 27,
+    name: 'JGB',
+    age: 24,
+    email: 'jgb@gmail.com',
+    contact: 3790475993,
+    mentorId: 1,
+    placement: true,
+    codekataProbs: 240,
+    problemSolving: true,
+    attendenceId: 1,
+    taskSubmission: true,
+    'Placement Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f1072294"),
+    id: 28,
+    name: 'IHD',
+    age: 32,
+    email: 'ihd@gmail.com',
+    contact: 7687598471,
+    mentorId: 2,
+    placement: true,
+    codekataProbs: 280,
+    problemSolving: true,
+    attendenceId: 1,
+    taskSubmission: false,
+    'Placement Data': []
+  }
+]
+======================================================================================================
+// 4.Find the number of problems solved by the user in codekata (Using Find)
+
+db.users.aggregate([
+  {
+    $lookup: {
+      from: "codekata",
+      localField: "id",
+      foreignField: "userId",
+      as: "Problem Solving Data",
+    },
+  },
+  {
+    $match: {
+      codekataProbs: { $ne: 0 },
+    },
+  },
+]);
+
+=>output
+[
+  {
+    _id: ObjectId("63ecef16b4102824f1072279"),
+    id: 1,
+    name: 'AAA',
+    age: 20,
+    email: 'aa@gmail.com',
+    contact: 987654324,
+    mentorId: 2,
+    placement: true,
+    codekataProbs: 10,
+    problemSolving: true,
+    attendenceId: 1,
+    taskSubmission: true,
+    'Problem Solving Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f107227a"),
+    id: 2,
+    name: 'BBB',
+    age: 25,
+    email: 'bb@gmail.com',
+    contact: 5609372856,
+    mentorId: 2,
+    placement: false,
+    codekataProbs: 50,
+    problemSolving: true,
+    attendenceId: 2,
+    taskSubmission: false,
+    'Problem Solving Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f107227b"),
+    id: 3,
+    name: 'CCC',
+    age: 24,
+    email: 'cc@gmail.com',
+    contact: 6546547994,
+    mentorId: 2,
+    placement: true,
+    codekataProbs: 20,
+    problemSolving: true,
+    attendenceId: 2,
+    taskSubmission: false,
+    'Problem Solving Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f107227c"),
+    id: 4,
+    name: 'DDD',
+    age: 34,
+    email: 'dd@gmail.com',
+    contact: 8964693987,
+    mentorId: 2,
+    placement: true,
+    codekataProbs: 30,
+    problemSolving: false,
+    attendenceId: 2,
+    taskSubmission: false,
+    'Problem Solving Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f107227d"),
+    id: 5,
+    name: 'EEE',
+    age: 26,
+    email: 'ee@gmail.com',
+    contact: 7387564350,
+    mentorId: 3,
+    placement: true,
+    codekataProbs: 90,
+    problemSolving: false,
+    attendenceId: 1,
+    taskSubmission: false,
+    'Problem Solving Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f107227e"),
+    id: 6,
+    name: 'FFF',
+    age: 30,
+    email: 'ff@gmail.com',
+    contact: 8284667647,
+    mentorId: 4,
+    placement: false,
+    codekataProbs: 40,
+    problemSolving: false,
+    attendenceId: 1,
+    taskSubmission: false,
+    'Problem Solving Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f107227f"),
+    id: 7,
+    name: 'GGG',
+    age: 28,
+    email: 'gg@gmail.com',
+    contact: 4380365683,
+    mentorId: 5,
+    placement: true,
+    codekataProbs: 80,
+    problemSolving: true,
+    attendenceId: 2,
+    taskSubmission: true,
+    'Problem Solving Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f1072280"),
+    id: 8,
+    name: 'HHH',
+    age: 35,
+    email: 'hh@gmail.com',
+    contact: 9328758974,
+    mentorId: 3,
+    placement: true,
+    codekataProbs: 70,
+    problemSolving: true,
+    attendenceId: 2,
+    taskSubmission: true,
+    'Problem Solving Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f1072281"),
+    id: 9,
+    name: 'III',
+    age: 32,
+    email: 'ii@gmail.com',
+    contact: 928374623,
+    mentorId: 2,
+    placement: false,
+    codekataProbs: 60,
+    problemSolving: false,
+    attendenceId: 1,
+    taskSubmission: true,
+    'Problem Solving Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f1072282"),
+    id: 10,
+    name: 'JJJ',
+    age: 21,
+    email: 'jj@gmail.com',
+    contact: 2345678987,
+    mentorId: 2,
+    placement: false,
+    codekataProbs: 120,
+    problemSolving: true,
+    attendenceId: 2,
+    taskSubmission: true,
+    'Problem Solving Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f1072283"),
+    id: 11,
+    name: 'KKK',
+    age: 23,
+    email: 'kk@gmail.com',
+    contact: 2324897485,
+    mentorId: 3,
+    placement: true,
+    codekataProbs: 150,
+    problemSolving: true,
+    attendenceId: 1,
+    taskSubmission: true,
+    'Problem Solving Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f1072284"),
+    id: 12,
+    name: 'LLL',
+    age: 20,
+    email: 'll@gmail.com',
+    contact: 9876543345,
+    mentorId: 4,
+    placement: true,
+    codekataProbs: 200,
+    problemSolving: true,
+    attendenceId: 2,
+    taskSubmission: true,
+    'Problem Solving Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f1072285"),
+    id: 13,
+    name: 'MMM',
+    age: 27,
+    email: 'mm@gmail.com',
+    contact: 7654345679,
+    mentorId: 5,
+    placement: false,
+    codekataProbs: 130,
+    problemSolving: true,
+    attendenceId: 1,
+    taskSubmission: false,
+    'Problem Solving Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f1072286"),
+    id: 14,
+    name: 'NNN',
+    age: 26,
+    email: 'nn@gmail.com',
+    contact: 9837463765,
+    mentorId: 2,
+    placement: true,
+    codekataProbs: 160,
+    problemSolving: false,
+    attendenceId: 1,
+    taskSubmission: false,
+    'Problem Solving Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f1072287"),
+    id: 15,
+    name: 'OOO',
+    age: 20,
+    email: 'oo@gmail.com',
+    contact: 3894258490,
+    mentorId: 4,
+    placement: true,
+    codekataProbs: 100,
+    problemSolving: true,
+    attendenceId: 1,
+    taskSubmission: false,
+    'Problem Solving Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f1072288"),
+    id: 16,
+    name: 'PPP',
+    age: 33,
+    email: 'pp@gmail.com',
+    contact: 9832746535,
+    mentorId: 2,
+    placement: false,
+    codekataProbs: 210,
+    problemSolving: true,
+    attendenceId: 2,
+    taskSubmission: false,
+    'Problem Solving Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f1072289"),
+    id: 17,
+    name: 'QQQ',
+    age: 29,
+    email: 'qq@gmail.com',
+    contact: 3948937565,
+    mentorId: 2,
+    placement: true,
+    codekataProbs: 300,
+    problemSolving: true,
+    attendenceId: 2,
+    taskSubmission: false,
+    'Problem Solving Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f107228a"),
+    id: 18,
+    name: 'RRR',
+    age: 34,
+    email: 'rr@gmail.com',
+    contact: 7863526586,
+    mentorId: 1,
+    placement: false,
+    codekataProbs: 110,
+    problemSolving: true,
+    attendenceId: 2,
+    taskSubmission: true,
+    'Problem Solving Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f107228b"),
+    id: 19,
+    name: 'SSS',
+    age: 35,
+    email: 'ss@gmail.com',
+    contact: 9876874390,
+    mentorId: 2,
+    placement: true,
+    codekataProbs: 170,
+    problemSolving: true,
+    attendenceId: 2,
+    taskSubmission: true,
+    'Problem Solving Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f107228c"),
+    id: 20,
+    name: 'TTT',
+    age: 27,
+    email: 'tt@gmail.com',
+    contact: 5428552656,
+    mentorId: 2,
+    placement: true,
+    codekataProbs: 180,
+    problemSolving: true,
+    attendenceId: 1,
+    taskSubmission: false,
+    'Problem Solving Data': []
+  }
+]
+
+===============================================================================
+/ 5.Find all the mentors with who has the mentee's count more than 15 (Using lookup and match)
+
+db.mentor.aggregate([
+  {
+    $lookup: {
+      from: "users",
+      localField: "id",
+      foreignField: "mentorId",
+      as: "Mentees Count Data",
+    },
+  },
+  {
+    $match: {
+      menteeCount: { $gt: 15 },
+    },
+  },
+]);
+=>output
+[
+  {
+    _id: ObjectId("63ecf17857fcc703642b77f7"),
+    id: 2,
+    name: 'mentor2',
+    menteeCount: 19,
+    'Mentees Count Data': []
+  },
+  {
+    _id: ObjectId("63ecf17857fcc703642b77f8"),
+    id: 3,
+    name: 'mentor3',
+    menteeCount: 20,
+    'Mentees Count Data': []
+  }
+]
+====================================================================================================
+// 6.Find the number of users who are absent and task is not submitted  between 15 oct-2020 and 31-oct-2020 (Using lookup)
+
+db.users.aggregate([
+  {
+    $lookup: {
+      from: "tasks",
+      localField: "id",
+      foreignField: "userId",
+      as: "Absent and Task not Submitted Data",
+    },
+  },
+  {
+    $match: {
+      $and: [{ attendenceId: 2 }, { taskSubmission: false }],
+    },
+  },
+]);
+
+=>output
+[
+  {
+    _id: ObjectId("63ecef16b4102824f107227a"),
+    id: 2,
+    name: 'BBB',
+    age: 25,
+    email: 'bb@gmail.com',
+    contact: 5609372856,
+    mentorId: 2,
+    placement: false,
+    codekataProbs: 50,
+    problemSolving: true,
+    attendenceId: 2,
+    taskSubmission: false,
+    'Absent and Task not Submitted Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f107227b"),
+    id: 3,
+    name: 'CCC',
+    age: 24,
+    email: 'cc@gmail.com',
+    contact: 6546547994,
+    mentorId: 2,
+    placement: true,
+    codekataProbs: 20,
+    problemSolving: true,
+    attendenceId: 2,
+    taskSubmission: false,
+    'Absent and Task not Submitted Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f107227c"),
+    id: 4,
+    name: 'DDD',
+    age: 34,
+    email: 'dd@gmail.com',
+    contact: 8964693987,
+    mentorId: 2,
+    placement: true,
+    codekataProbs: 30,
+    problemSolving: false,
+    attendenceId: 2,
+    taskSubmission: false,
+    'Absent and Task not Submitted Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f1072288"),
+    id: 16,
+    name: 'PPP',
+    age: 33,
+    email: 'pp@gmail.com',
+    contact: 9832746535,
+    mentorId: 2,
+    placement: false,
+    codekataProbs: 210,
+    problemSolving: true,
+    attendenceId: 2,
+    taskSubmission: false,
+    'Absent and Task not Submitted Data': []
+  },
+  {
+    _id: ObjectId("63ecef16b4102824f1072289"),
+    id: 17,
+    name: 'QQQ',
+    age: 29,
+    email: 'qq@gmail.com',
+    contact: 3948937565,
+    mentorId: 2,
+    placement: true,
+    codekataProbs: 300,
+    problemSolving: true,
+    attendenceId: 2,
+    taskSubmission: false,
+    'Absent and Task not Submitted Data': []
+  },
+  {
+    _id: ObjectId("63ecf06b57fcc703642b777f"),
+    id: 2,
+    name: 'BBB',
+    age: 25,
+    email: 'bb@gmail.com',
+    contact: 5609372856,
+    mentorId: 2,
+    placement: false,
+    codekataProbs: 50,
+    problemSolving: true,
+    attendenceId: 2,
+    taskSubmission: false,
+    'Absent and Task not Submitted Data': []
+  },
+  {
+    _id: ObjectId("63ecf06b57fcc703642b7780"),
+    id: 3,
+    name: 'CCC',
+    age: 24,
+    email: 'cc@gmail.com',
+    contact: 6546547994,
+    mentorId: 2,
+    placement: true,
+    codekataProbs: 20,
+    problemSolving: true,
+    attendenceId: 2,
+    taskSubmission: false,
+    'Absent and Task not Submitted Data': []
+  },
+  {
+    _id: ObjectId("63ecf06b57fcc703642b7781"),
+    id: 4,
+    name: 'DDD',
+    age: 34,
+    email: 'dd@gmail.com',
+    contact: 8964693987,
+    mentorId: 2,
+    placement: true,
+    codekataProbs: 30,
+    problemSolving: false,
+    attendenceId: 2,
+    taskSubmission: false,
+    'Absent and Task not Submitted Data': []
+  },
+  {
+    _id: ObjectId("63ecf06b57fcc703642b778d"),
+    id: 16,
+    name: 'PPP',
+    age: 33,
+    email: 'pp@gmail.com',
+    contact: 9832746535,
+    mentorId: 2,
+    placement: false,
+    codekataProbs: 210,
+    problemSolving: true,
+    attendenceId: 2,
+    taskSubmission: false,
+    'Absent and Task not Submitted Data': []
+  },
+  {
+    _id: ObjectId("63ecf06b57fcc703642b778e"),
+    id: 17,
+    name: 'QQQ',
+    age: 29,
+    email: 'qq@gmail.com',
+    contact: 3948937565,
+    mentorId: 2,
+    placement: true,
+    codekataProbs: 300,
+    problemSolving: true,
+    attendenceId: 2,
+    taskSubmission: false,
+    'Absent and Task not Submitted Data': []
+  }
+]
+
